@@ -22,6 +22,9 @@ def total_salary(path: str) -> tuple[float, float]:
     except FileNotFoundError:
         print(f"Файл '{path}' не знайдено.")
         return None, None
+    except Exception as e:
+        print(f"Файл пошкоджено або виникла помилка: {e}")
+        return None, None
 
 
 if __name__ == "__main__":
