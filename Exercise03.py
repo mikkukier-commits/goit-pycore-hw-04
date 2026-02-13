@@ -8,20 +8,25 @@ init(autoreset=True)
 
 # Рекурсивна функція для виведення структури директорії
 def print_dir_structure(path: Path, prefix: str = "") -> None:
-    if not Path(path).exists():
+    if not path.exists():  # Перевірка на існування шляху
         print(f"{Fore.RED}Помилка: Шлях '{path}' не існує.")
         return
 
-    if not Path(path).is_dir():
+    if not path.is_dir():  # Перевірка на те, чи є шлях директорією
         print(f"{Fore.RED}Помилка: '{path}' не є директорією.")
         return
-
-    for item in sorted(path.iterdir()):
-        if item.is_dir():
-            print(f"{prefix}{Fore.BLUE} {item.name}/")
-            print_dir_structure(item, prefix + "    ")
-        else:
-            print(f"{prefix}{Fore.GREEN} {item.name}")
+    try:
+        # Сортуємо елементи для більш організованого виведення
+        for item in sorted(path.iterdir()):
+            if item.is_dir():
+                print(f"{prefix}{Fore.BLUE} {item.name}/")
+                print_dir_structure(item, prefix + "    ")
+            else:
+                print(f"{prefix}{Fore.GREEN} {item.name}")
+    except PermissionError:
+        print(f"{Fore.RED}Помилка: Немає доступу до директорії '{path}'.")
+    except Exception as e:
+        print(f"{Fore.RED}Сталася невідома помилка при обробці '{path}': {e}")
 
 
 if __name__ == "__main__":

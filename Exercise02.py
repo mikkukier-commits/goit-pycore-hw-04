@@ -1,7 +1,7 @@
 def get_cats_info(path: str) -> list[dict]:
     cats = []
     try:
-        with open(path, 'r') as file:
+        with open(path, 'r', encoding='utf-8') as file:
             for line in file:
                 line = line.strip()
                 if not line:
@@ -21,6 +21,9 @@ def get_cats_info(path: str) -> list[dict]:
 
     except FileNotFoundError:
         print(f"Файл '{path}' не знайдено.")
+        return []
+    except Exception as e:
+        print(f"Файл пошкоджено або виникла помилка: {e}")
         return []
 
 
