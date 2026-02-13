@@ -31,5 +31,5 @@ if __name__ == "__main__":
 
     directory_path = Path(sys.argv[1])
 
-    print(f"{Fore.BLUE}{directory_path.name}/")
+    print(f"\n{Fore.BLUE}{directory_path.name}/")
     print_dir_structure(directory_path, prefix="    ")
