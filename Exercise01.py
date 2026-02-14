@@ -1,6 +1,6 @@
 def total_salary(path: str) -> tuple[float, float]:
     try:
-        with open(path, 'r') as file:
+        with open(path, 'r', encoding='utf-8') as file:
             salaries = []
 
             for line in file:
